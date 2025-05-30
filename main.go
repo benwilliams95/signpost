@@ -53,6 +53,13 @@ func main() {
 		}
 	}
 
+	for _, t := range config.Gym {
+		gymTemplate, err = gymTemplate.New(t.Name).Parse(t.Url)
+		if err != nil {
+			panic(err)
+		}
+	}
+
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
 	r.GET("/pokemon/:pokemon_id/:template", GetPokemon)
